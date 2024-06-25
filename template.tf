@@ -24,7 +24,7 @@ resource "azurerm_public_ip" "tfresource" {
 }
 
 resource "azurerm_network_interface" "tfresource" {
-  name                = "${var.nic}"
+  name                = "${var.vmName}-nic"
   location            = "${var.region}"
   resource_group_name = "${var.isNewResourceGroup ? azurerm_resource_group.tfresource[0].name : var.existingResourceGroup}"
 
@@ -47,8 +47,8 @@ resource "azurerm_virtual_machine" "tfresource" {
 
   os_profile {
     computer_name  = "${var.vmName}"
-    admin_username = "${var.adminUserName}"
-    admin_password = "${var.isPassword ? var.password : null}"
+    admin_username = "azureuser"
+    admin_password = "Password!123"
   }
   os_profile_linux_config {
     disable_password_authentication = "false"
