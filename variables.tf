@@ -31,11 +31,3 @@ variable image_version {}
 variable deleteOSDiskOnTerm {
   type = bool
 }
-
-variable "disks" {
-  type = list(object({
-    volume_size  = number
-    volume_type  = string
-    max_shares = number
-  }))
-}
