@@ -9,9 +9,6 @@ data "azurerm_subnet" "tfresource" {
   virtual_network_name = data.azurerm_virtual_network.tfresource.name
 }
 
-locals {
-  _isSSHKey = "${var.isPassword ? {} : { empty = true }}"
-}
 
 resource "azurerm_resource_group" "tfresource" {
   count = "${var.isNewResourceGroup ? 1 : 0}"
