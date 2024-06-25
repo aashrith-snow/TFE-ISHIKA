@@ -14,13 +14,4 @@ variable vmName {}
 variable network {}
 variable subnet {}
 variable networkResourceGroup {}
-variable nic {}
 variable size {}
-variable adminUserName {}
-
-variable password {}
-
-
-variable deleteOSDiskOnTerm {
-  type = bool
-}
