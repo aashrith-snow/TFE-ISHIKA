@@ -72,26 +72,30 @@ resource "azurerm_virtual_machine" "tfresource" {
   }
 
   storage_image_reference {
-    publisher = "${var.image_publisher}"
-    offer     = "${var.image_offer}"
-    sku       = "${var.image_sku}"
-    version   = "${var.image_version}"
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts"
+    version   = "latest"
   }
 
-  delete_os_disk_on_termination = "${var.deleteOSDiskOnTerm}"
+  delete_os_disk_on_termination = "true"
   delete_data_disks_on_termination = true
 
 }
 
 resource "azurerm_managed_disk" "storage_disks" {
-  for_each             = { for idx, disk in var.disks : idx => disk }
-  name                 = "${var.vmName}-disk-${each.key}"
+  name                 = "${var.vmName}-disk-0"
   location             = "${var.region}"
   resource_group_name  = "${var.isNewResourceGroup ? azurerm_resource_group.tfresource[0].name : var.existingResourceGroup}"
-  storage_account_type = "${each.value.volume_type}"
+  storage_account_type = "Standard_LRS"
   create_option        = "Empty"
-  disk_size_gb         = "${each.value.volume_size}"
-  max_shares           = "${each.value.max_shares != null && each.value.max_shares > 1 ? each.value.max_shares : null}"
+  disk_size_gb         = "20"
+  max_shares           = "0"
+  tags = {
+    environment = "staging"
+    tag1 = "value1"
+    tag2 = "value2"
+  }
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachments" {
