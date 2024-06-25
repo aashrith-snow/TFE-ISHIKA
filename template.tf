@@ -80,7 +80,6 @@ resource "azurerm_managed_disk" "storage_disks" {
   storage_account_type = "Standard_LRS"
   create_option        = "Empty"
   disk_size_gb         = "20"
-  max_shares           = "2"
   tags = {
     environment = "staging"
     tag1 = "value1"
@@ -89,9 +88,8 @@ resource "azurerm_managed_disk" "storage_disks" {
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachments" {
-  for_each           = azurerm_managed_disk.storage_disks
-  managed_disk_id    = each.value.id
+  managed_disk_id    = azurerm_managed_disk.storage_disks.id
   virtual_machine_id = azurerm_virtual_machine.tfresource.id
-  lun                = each.key
+  lun                = "10"
   caching            = "None"
 }
