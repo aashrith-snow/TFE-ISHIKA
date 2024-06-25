@@ -1,17 +1,21 @@
 "Metadata": {
-  "SNC::Parameter::Metadata": {
-    "keyname": {
-      "datasource": "ServiceNow::Pools::CloudKeyPairPool.getObjectsByLDC"
-    },
-    "instancetype": {
-      "datasource": "ServiceNow::Pools::HardwareTypePool.getObjectsByLDC"
-    },
-    "network": {
-      "datasource": "ServiceNow::Pools::NetworkPool.getObjectIdByLDC"
-    },
-    "subnet": {
-      "datasource": "ServiceNow::Pools::SubnetPool.getObjectIdByNetwork",
-      "datasourceFilter": {"Network":"network"}
+    "SNC::Parameter::Metadata": {
+        "existingResourceGroup":{
+            "datasource":"ServiceNow::Pools:: ResourceGroupPool.getByLDC"
+        },
+        "networkResourceGroup":{
+            "datasource":"ServiceNow::Pools:: ResourceGroupPool.getByLDC"
+        },
+        "network":{
+            "datasource":"ServiceNow::Pools::NetworkPool.getNetworksByResourceGroupLDC",
+            "datasourceFilter":{"ResourceGroup":"networkResourceGroup"}
+        },
+        "subnet":{
+            "datasource":"ServiceNow::Pools:: SubnetPool.getAzureSubnetsByNetwork",
+            "datasourceFilter":{"Network":"network", "ResourceGroup":"networkResourceGroup"}
+        },
+        "size": {
+            "datasource": "ServiceNow::Pools::HardwareTypePool.getObjectsByLDC"
+        }
     }
-  }
 }
