@@ -17,10 +17,7 @@ variable networkResourceGroup {}
 variable nic {}
 variable size {}
 variable adminUserName {}
-variable publicKey {}
-variable isPassword {
-  type = bool
-}
+
 variable password {}
 
 
