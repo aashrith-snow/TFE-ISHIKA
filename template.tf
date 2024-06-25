@@ -80,7 +80,7 @@ resource "azurerm_managed_disk" "storage_disks" {
   storage_account_type = "Standard_LRS"
   create_option        = "Empty"
   disk_size_gb         = "20"
-  max_shares           = "0"
+  max_shares           = "2"
   tags = {
     environment = "staging"
     tag1 = "value1"
