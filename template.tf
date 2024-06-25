@@ -54,14 +54,7 @@ resource "azurerm_virtual_machine" "tfresource" {
     admin_password = "${var.isPassword ? var.password : null}"
   }
   os_profile_linux_config {
-    disable_password_authentication = "${var.isPassword ? false : true}"
-    dynamic "ssh_keys" {
-      for_each = local._isSSHKey
-      content {
-        key_data = "${var.publicKey}"
-        path = "/home/${var.adminUserName}/.ssh/authorized_keys"
-      }
-    }
+    disable_password_authentication = "false"
   }
 
   storage_os_disk {
