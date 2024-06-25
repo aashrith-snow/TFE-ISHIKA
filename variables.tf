@@ -23,10 +23,6 @@ variable isPassword {
 }
 variable password {}
 
-variable image_publisher {}
-variable image_offer {}
-variable image_sku {}
-variable image_version {}
 
 variable deleteOSDiskOnTerm {
   type = bool
